@@ -107,7 +107,6 @@ public class MerchantStockService {
         return false;
     }
 
-    // Buy a product
     public String buyProduct(Integer productId, Integer merchantId) {
         for (MerchantStock stock : getStock()) {
             if (stock.getProduct().getId().equals(productId) && stock.getMerchant().getId().equals(merchantId)) {

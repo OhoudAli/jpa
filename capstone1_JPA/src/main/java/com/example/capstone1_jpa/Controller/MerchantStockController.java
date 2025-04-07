@@ -55,4 +55,25 @@ public class MerchantStockController {
         merchantStockService.delete(id);
         return ResponseEntity.status(200).body(new ApiResponse("delete successfully"));
     }
+
+    @PostMapping("/add/{productId}/{merchantId}/{amount}")
+    public String addNewStock(@PathVariable Integer productId, @PathVariable Integer merchantId, @PathVariable int amount) {
+        return merchantStockService.addNewStock(productId, merchantId, amount);
+    }
+
+    @PutMapping("/update/{productId}/{merchantId}/{amount}")
+    public String updateStockLevel(@PathVariable Integer productId, @PathVariable Integer merchantId, @PathVariable int amount) {
+        boolean isUpdated = merchantStockService.updateStockLevel(productId, merchantId, amount);
+        return isUpdated ? "Stock updated successfully" : "Stock not found for this product and merchant";
+    }
+
+    @PostMapping("/buy/{productId}/{merchantId}")
+    public String buyProduct(@PathVariable Integer productId, @PathVariable Integer merchantId) {
+        return merchantStockService.buyProduct(productId, merchantId);
+    }
+
+    @GetMapping("/check-stock/{productId}/{merchantId}")
+    public String checkStockLevel(@PathVariable Integer productId, @PathVariable Integer merchantId) {
+        return merchantStockService.checkStockLevel(productId, merchantId);
+    }
 }
